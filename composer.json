@@ -1,0 +1,28 @@
+{
+    "name": "kloth/myturn-core",
+    "version": "1.0.0",
+    "description": "Framework-independent MyTurn page and embed integration core",
+    "type": "library",
+    "license": "proprietary",
+    "require": {
+        "php": ">=8.4",
+        "ext-dom": "*",
+        "guzzlehttp/guzzle": "^7.0"
+    },
+    "require-dev": {
+        "phpunit/phpunit": "^11.5"
+    },
+    "autoload": {
+        "psr-4": {
+            "EdwinLove\\MyTurn\\Core\\": "src/"
+        }
+    },
+    "autoload-dev": {
+        "psr-4": {
+            "EdwinLove\\MyTurn\\Core\\Tests\\": "tests/"
+        }
+    },
+    "scripts": {
+        "test": "phpunit -c phpunit.xml"
+    }
+}

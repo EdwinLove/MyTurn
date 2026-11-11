@@ -15,15 +15,15 @@ final class BuildSearchPageTest extends TestCase
     {
         $metadata = new PageMetadata('Search results', 'Tools matching tent');
         $client = new MyTurnPageClientSpy($metadata);
-        $useCase = new BuildSearchPage($client, 'https://kloth.myturn.com/', 'https://kloth.org.uk/');
+        $useCase = new BuildSearchPage($client, 'https://mysite.myturn.com/', 'https://mysite.com/');
 
         $page = $useCase->execute('tent & tools');
 
         self::assertSame(
-            'https://kloth.myturn.com/library/inventory/browse?q=tent%20%26%20tools&embed=true',
+            'https://mysite.myturn.com/library/inventory/browse?q=tent%20%26%20tools&embed=true',
             $page->embedUrl
         );
-        self::assertSame('https://kloth.org.uk/thing/search/tent%20%26%20tools', $page->canonicalUrl);
+        self::assertSame('https://mysite.com/thing/search/tent%20%26%20tools', $page->canonicalUrl);
         self::assertSame($metadata, $page->metadata);
         self::assertSame([$page->embedUrl], $client->requestedUrls);
     }
@@ -31,11 +31,11 @@ final class BuildSearchPageTest extends TestCase
     public function testAllowsTheWordPressAdapterToProvideItsCanonicalPath(): void
     {
         $client = new MyTurnPageClientSpy(null);
-        $useCase = new BuildSearchPage($client, 'https://kloth.myturn.com/', 'https://kloth.org.uk/');
+        $useCase = new BuildSearchPage($client, 'https://mysite.myturn.com/', 'https://mysite.com/');
 
         $page = $useCase->execute('tent', 'find/tent/');
 
-        self::assertSame('https://kloth.org.uk/find/tent/', $page->canonicalUrl);
+        self::assertSame('https://mysite.com/find/tent/', $page->canonicalUrl);
         self::assertNull($page->metadata);
     }
 }

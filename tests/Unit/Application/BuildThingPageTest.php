@@ -15,12 +15,12 @@ final class BuildThingPageTest extends TestCase
     {
         $metadata = new PageMetadata('Drill', 'Cordless drill', 'https://images.example/drill.jpg');
         $client = new MyTurnPageClientSpy($metadata);
-        $useCase = new BuildThingPage($client, 'https://kloth.myturn.com/', 'https://kloth.org.uk/');
+        $useCase = new BuildThingPage($client, 'https://mysite.myturn.com/', 'https://mysite.com/');
 
         $page = $useCase->execute(42);
 
-        self::assertSame('https://kloth.myturn.com/library/inventory/show/42?embed=true', $page->embedUrl);
-        self::assertSame('https://kloth.org.uk/thing/42', $page->canonicalUrl);
+        self::assertSame('https://mysite.myturn.com/library/inventory/show/42?embed=true', $page->embedUrl);
+        self::assertSame('https://mysite.com/thing/42', $page->canonicalUrl);
         self::assertSame($metadata, $page->metadata);
         self::assertSame([$page->embedUrl], $client->requestedUrls);
     }
@@ -28,11 +28,11 @@ final class BuildThingPageTest extends TestCase
     public function testAllowsTheWordPressAdapterToProvideItsCanonicalPath(): void
     {
         $client = new MyTurnPageClientSpy(null);
-        $useCase = new BuildThingPage($client, 'https://kloth.myturn.com/', 'https://kloth.org.uk/');
+        $useCase = new BuildThingPage($client, 'https://mysite.myturn.com/', 'https://mysite.com/');
 
         $page = $useCase->execute(42, 'tools/42/');
 
-        self::assertSame('https://kloth.org.uk/tools/42/', $page->canonicalUrl);
+        self::assertSame('https://mysite.com/tools/42/', $page->canonicalUrl);
         self::assertNull($page->metadata);
     }
 }

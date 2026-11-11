@@ -26,7 +26,7 @@ final class GuzzleMyTurnPageClientTest extends TestCase
             HTML;
         $adapter = $this->clientWithResponses(new Response(200, [], $html));
 
-        $metadata = $adapter->getMetadata('https://kloth.myturn.com/library/inventory/show/42?embed=true');
+        $metadata = $adapter->getMetadata('https://mysite.myturn.com/library/inventory/show/42?embed=true');
 
         self::assertEquals(
             new PageMetadata('Cordless drill', 'A useful drill', 'https://images.example/drill.jpg'),
@@ -38,7 +38,7 @@ final class GuzzleMyTurnPageClientTest extends TestCase
     {
         $adapter = $this->clientWithResponses(new Response(503));
 
-        self::assertNull($adapter->getMetadata('https://kloth.myturn.com/library/inventory/show/42?embed=true'));
+        self::assertNull($adapter->getMetadata('https://mysite.myturn.com/library/inventory/show/42?embed=true'));
     }
 
     private function clientWithResponses(Response ...$responses): GuzzleMyTurnPageClient

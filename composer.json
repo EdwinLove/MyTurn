@@ -1,6 +1,6 @@
 {
-    "name": "kloth/myturn-core",
-    "version": "1.0.0",
+    "name": "edwinlove/myturn-core",
+    "version": "1.0.1",
     "description": "Framework-independent MyTurn page and embed integration core",
     "type": "library",
     "license": "proprietary",
